@@ -69,9 +69,6 @@ while again==True:
       self.end_index = end_index
       self.fuzzscore = fuzzscore
   
-  def highlight_string(string):
-    return f"\033[1;93m{string}\033[0m"
-  
   match_list = []
   
   #ini_str = input("Enter DNA string: ").upper()
@@ -85,19 +82,14 @@ while again==True:
     for x in range(4):
       if(i + x <= n - 28):
         current_local_fuzzscore = fuzzmatch(ini_str[i : i + 6], ini_str[i + 22 + x: i + 28 + x])
-        if str(current_local_fuzzscore) > str(max_local_fuzzscore):
+        if current_local_fuzzscore > max_local_fuzzscore:
           max_local_fuzzscore = current_local_fuzzscore
           best_start_string =  ini_str[i : i + 6]
           best_start_index = i
           best_end_string = ini_str[i + 22 + x: i + 28 + x]
           best_end_index = i + 22 + x
-      if str(max_local_fuzzscore) >= str(8):
-        best_start_string = highlight_string(best_start_string)
-        best_end_string = highlight_string(best_end_string)
-        best_start_index = highlight_string(best_start_index)
-        best_end_index = highlight_string(best_end_index)
-        max_local_fuzzscore = highlight_string(max_local_fuzzscore)
-    match_list.append(Match(best_start_string,best_end_string,best_start_index,best_end_index,max_local_fuzzscore))   
+    match_list.append(Match(best_start_string,best_end_string,best_start_index,best_end_index,max_local_fuzzscore)) 
+    match_list.sort(key=lambda x:x.fuzzscore, reverse = True)
   
   for obj in match_list:
     table = PrettyTable(['-35 String','-10 String', '-35 Start Index', '-10 Start Index', 'Fuzzy Score'])
