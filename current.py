@@ -18,15 +18,15 @@ while again==True:
   ini_str = input("Enter DNA string: ").upper()
   
   class InvalidInputError(Exception):
-      """Exception raised for invalid characters in DNA Input.
-  
+    """Exception raised for invalid characters in DNA Input.
+
       Attributes:
         error_string --  The invalid DNA input
         message -- explanation of the error
-      """
+    """
   
       def __init__(self, error_string):
-          invalid_dict = {}
+        invalid_dict = {}
         highlighted_string = ""
           for i in range(len(ini_str)):
             if ini_str[i] not in accepted_characters:
@@ -35,11 +35,10 @@ while again==True:
               invalid_dict[i] = ini_str[i]#USE INDICES AND NOT COUNTS,
             else:
               highlighted_string += ini_str[i]
-          print(highlighted_string)
           error_string = str(invalid_dict) 
           self.message = error_string
           super().__init__(self.message)
-  
+          print(highlighted_string)
   class InvalidLengthError(Exception):
     """Exception raised for input of invalid DNA length
     
