@@ -26,8 +26,7 @@ class InvalidInputError(Exception):
         invalid_dict = {}
         for i in range(len(ini_str)):
           if ini_str[i] not in accepted_characters:
-            invalid_dict.setdefault(ini_str[i], 0)
-            invalid_dict[ini_str[i]] = invalid_dict[ini_str[i]] + 1 #USE INDICES AND NOT COUNTS,
+            invalid_dict[i] = ini_str[i]#USE INDICES AND NOT COUNTS,
         error_string = str(invalid_dict) 
         self.message = error_string
         super().__init__(self.message)
