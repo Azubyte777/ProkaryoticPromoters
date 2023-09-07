@@ -91,7 +91,7 @@ while again==True:
           best_start_index = i
           best_end_string = ini_str[i + 22 + x: i + 28 + x]
           best_end_index = i + 22 + x
-      if max_local_fuzzscore >= 8:
+      if str(max_local_fuzzscore) >= str(8):
         best_start_string = highlight_string(best_start_string)
         best_end_string = highlight_string(best_end_string)
         best_start_index = highlight_string(best_start_index)
