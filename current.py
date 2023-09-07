@@ -11,7 +11,7 @@ def fuzzmatch(string_one, string_two):
       match_count_two+=1
   return match_count_one+match_count_two
 
-accepted_characters = ['A','T','C','G']
+accepted_characters = ['A','T','C','G', 'U', 'K', 'B', 'V', 'S', 'N', 'W', 'D', 'Y', 'R', 'H']
 ini_str = input("Enter DNA string: ").upper()
 
 class InvalidInputError(Exception):
