@@ -67,6 +67,8 @@ class Match:
     self.end_index = end_index
     self.fuzzscore = fuzzscore
 
+def highlight_string(string):
+  return f"\033[1;93m{string}\033[0m"
 
 match_list = []
 
@@ -87,6 +89,12 @@ for i in range(n - 27):
         best_start_index = i
         best_end_string = ini_str[i + 22 + x: i + 28 + x]
         best_end_index = i + 22 + x
+    if max_local_fuzzscore >= 8:
+      best_start_string = highlight_string(best_start_string)
+      best_end_string = highlight_string(best_end_string)
+      best_start_index = highlight_string(best_start_index)
+      best_end_index = highlight_string(best_end_index)
+      max_local_fuzzscore = highlight_string(max_local_fuzzscore)
   match_list.append(Match(best_start_string,best_end_string,best_start_index,best_end_index,max_local_fuzzscore))   
 
 for obj in match_list:
