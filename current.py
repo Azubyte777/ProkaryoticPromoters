@@ -25,21 +25,21 @@ while again==True:
         message -- explanation of the error
     """
   
-      def __init__(self, error_string):
-        invalid_dict = {}
-        highlighted_string = ""
-          for i in range(len(ini_str)):
-            if ini_str[i] not in accepted_characters:
-              char = ini_str[i]
-              highlighted_string += f"\033[1;31m{char}\033[0m"
-              invalid_dict[i] = ini_str[i]#USE INDICES AND NOT COUNTS,
-            else:
-              highlighted_string += ini_str[i]
-          error_string = str(invalid_dict) 
-          self.message = error_string
-          super().__init__(self.message)
-          print(highlighted_string)
-  class InvalidLengthError(Exception):
+		def __init__(self, error_string):
+			invalid_dict = {}
+			highlighted_string = ""
+			for i in range(len(ini_str)):
+				if ini_str[i] not in accepted_characters:
+					char = ini_str[i]
+					highlighted_string += f"\033[1;31m{char}\033[0m"
+					invalid_dict[i] = ini_str[i]#USE INDICES AND NOT COUNTS,
+				else:
+					highlighted_string += ini_str[i]
+				error_string = str(invalid_dict) 
+				self.message = error_string
+				super().__init__(self.message)
+			print('\n' + highlighted_string)
+	  class InvalidLengthError(Exception):
     """Exception raised for input of invalid DNA length
     
     Attributes:
