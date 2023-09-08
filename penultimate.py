@@ -4,7 +4,8 @@ from prettytable import PrettyTable #pip install prettytable
 def install(package):
   subprocess.check_call([sys.executable, "-m", "pip", "install", package])
 
-def fuzzmatch(string_one, string_two):
+# Beginning of the fuzzmatch function
+def fuzzmatch(string_one, string_two): 
     match_count_one = 0
     match_count_two = 0
     thirty_five_cs = "TTGACA"
@@ -16,7 +17,12 @@ def fuzzmatch(string_one, string_two):
       if string_two[i] == ten_cs[i]:
         match_count_two+=1
     return match_count_one+match_count_two
+# End of the fuzzmatch function
 
+""" The class below is meant to throw an ex eption (error message)
+in case of an invalid input (inappropriate DNA sequence) 
+"""
+# Beginning of the class
 class InvalidInputError(Exception):
   """Exception raised for invalid characters in DNA Input.
 
@@ -38,7 +44,8 @@ class InvalidInputError(Exception):
       self.message = error_string
       super().__init__(self.message)
     print('\n' + highlighted_string)
-  
+# End of the class
+
 class InvalidLengthError(Exception):
   """Exception raised for input of invalid DNA length
     
