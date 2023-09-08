@@ -42,15 +42,19 @@ class InvalidInputError(Exception):
       if ini_str[i] not in accepted_characters: # Checks is character is valid
         char = ini_str[i] # Invalid characte gets stored in the char variable
         highlighted_string += f"\033[1;31m{char}\033[0m" # the character gets highlighted 
-        invalid_dict[i] = ini_str[i]#USE INDICES AND NOT COUNTS,
+        invalid_dict[i] = ini_str[i] # invalid char gets added to the dictionary
       else:
-        highlighted_string += ini_str[i]
-      error_string = str(invalid_dict) 
-      self.message = error_string
-      super().__init__(self.message)
-    print('\n' + highlighted_string)
-# End of the class
+        highlighted_string += ini_str[i] 
+      error_string = str(invalid_dict) # A copy of the dictionary in string format is stored in the error_string variable
+      self.message = error_string # The error message (whole input with invalid characters highlighted) gets stored in the message variable
+      super().__init__(self.message) # The error message gets displayed
+    print('\n' + highlighted_string) # Thw whole input with invalid characters highlighted gets displayed
+# End of the InvalidInputError class
 
+""" The class below is meant to throw an exception (error message)
+in case of an invalid input (too short DNA sequence) 
+"""
+# Beginning of the InvalidLengthError class
 class InvalidLengthError(Exception):
   """Exception raised for input of invalid DNA length
     
@@ -60,10 +64,12 @@ class InvalidLengthError(Exception):
   """
     
   def __init__(self, error_string):
-    error_string = "DNA string entered is only " + str(len(ini_str)) + " characters long, it needs to be a minimum of 28 characters."
-    self.message = error_string
-    super().__init__(self.message)  
-  
+    error_string = "DNA string entered is only " + str(len(ini_str)) + " characters long, it needs to be a minimum of 28 characters." 
+    self.message = error_string # Error message
+    super().__init__(self.message) # Errtoe message gets displayed
+# End of the InvalidLengthError class
+
+# Beginning of the Match class
 class Match:
   def __init__(self, start_string, end_string, start_index, end_index, fuzzscore):#end = start of 2nd string
     self.start_string = start_string
@@ -74,16 +80,17 @@ class Match:
   
 accepted_characters = ['A','T','C','G', 'U', 'K', 'B', 'V', 'S', 'N', 'W', 'D', 'Y', 'R', 'H']  
   
-again = True
+again = True # Flag for our while loop
 while again==True:
   
-  ini_str = input("Enter DNA string: ").upper()
-    
+  ini_str = input("Enter DNA string: ").upper() # Gets input for user, gets changed to uppercase immediately so need to worry about cases
+
+  # This for loop checks the string character by character to check for appropriate length and accepted characters
   for i in range(len(ini_str)):
     if ini_str[i] not in accepted_characters:
-      raise InvalidInputError(ini_str)
+      raise InvalidInputError(ini_str) # Exception gets thrown if any invalid character has been located in the sequence 
   if len(ini_str) < 28:
-    raise InvalidLengthError(ini_str)
+    raise InvalidLengthError(ini_str) # Exception gets thrown if the length of the sequence is not at least 28
   
   match_list = []
   
@@ -113,14 +120,16 @@ while again==True:
     print(table)
     #print(obj.start_string, obj.end_string, obj.start_index, obj.end_index, obj.fuzzscore, sep=" ")
 
-  while True:
-    again = input("\nAre you submitting another sequence? Y/N ").strip().upper()
-    if again == "Y":
-      again = True
+  # The loop below gives the opportunity to the user to enter another DNA sequence: N for declining and Y for accepting
+  while True: 
+    again = input("\nAre you submitting another sequence? Y/N ").strip().upper() # Gets user choice
+    if again == "Y": # User has can input another DNA sequence
+      again = True 
       break
-    elif again == "N":
+    elif again == "N": # Program stops
       again = False
       break
     else:
-      print("\nResponse must be either Y or N")
+      print("\nResponse must be either Y or N") # Y and N are the only valid responses, if user enters anything else,
+                                                # code keeps asking him if he wants to continue
 #if that second for loop actually works we can then pull out the best fuzzscore matches from the array, or even sort it or sth then show it in text form with colors maybe
