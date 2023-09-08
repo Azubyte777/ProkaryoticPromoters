@@ -132,4 +132,3 @@ while again==True:
     else:
       print("\nResponse must be either Y or N") # Y and N are the only valid responses, if user enters anything else,
                                                 # code keeps asking him if he wants to continue
-#if that second for loop actually works we can then pull out the best fuzzscore matches from the array, or even sort it or sth then show it in text form with colors maybe
