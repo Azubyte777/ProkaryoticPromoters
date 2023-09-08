@@ -12,7 +12,7 @@ def install(package):
    @param string_two - The second string
    @return - The number of matches of both strings to the prokaryotic promoter sequences
 """
-def fuzzmatch(string_one, string_two): # The function
+def fuzzmatch(string_one, string_two): 
     match_count_one = 0
     match_count_two = 0
     thirty_five_cs = "TTGACA"  # Variable to store the -35 CS
