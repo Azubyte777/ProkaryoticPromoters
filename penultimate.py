@@ -5,24 +5,23 @@ def install(package):
   subprocess.check_call([sys.executable, "-m", "pip", "install", package])
 
 # Beginning of the fuzzmatch function
-def fuzzmatch(string_one, string_two): 
+def fuzzmatch(string_one, string_two): # The function takes 2 parameters(both strings) and they get compared
     match_count_one = 0
     match_count_two = 0
-    thirty_five_cs = "TTGACA"
-    ten_cs = "TATAAT"
-    for i in range(6):
-      if string_one[i] == thirty_five_cs[i]:
-        match_count_one+=1
-      
+    thirty_five_cs = "TTGACA"  # Variable to store the -35 CS
+    ten_cs = "TATAAT" # Variable to store the -10 CS
+    for i in range(6): # For loop that iterates 6 times (6 being the length of eacgh consensus)
+      if string_one[i] == thirty_five_cs[i]: 
+        match_count_one+=1 
       if string_two[i] == ten_cs[i]:
         match_count_two+=1
     return match_count_one+match_count_two
 # End of the fuzzmatch function
 
-""" The class below is meant to throw an ex eption (error message)
+""" The class below is meant to throw an exception (error message)
 in case of an invalid input (inappropriate DNA sequence) 
 """
-# Beginning of the class
+# Beginning of the InvalidInputError class
 class InvalidInputError(Exception):
   """Exception raised for invalid characters in DNA Input.
 
@@ -31,12 +30,18 @@ class InvalidInputError(Exception):
     message -- explanation of the error
   """
   def __init__(self, error_string):
-    invalid_dict = {}
+    invalid_dict = {} # A dictionary to store the invalid characters
     highlighted_string = ""
-    for i in range(len(ini_str)):
-      if ini_str[i] not in accepted_characters:
-        char = ini_str[i]
-        highlighted_string += f"\033[1;31m{char}\033[0m"
+    """ 
+    After the initial string (sequence) has been inputed,
+    This for loop goes through each nucleotide (some might be invalid),
+    checks them for validity (accepted character in a DNA sequence)
+    and each invalid character gets stored in 
+    """
+    for i in range(len(ini_str)): 
+      if ini_str[i] not in accepted_characters: # Checks is character is valid
+        char = ini_str[i] # Invalid characte gets stored in the char variable
+        highlighted_string += f"\033[1;31m{char}\033[0m" # the character gets highlighted 
         invalid_dict[i] = ini_str[i]#USE INDICES AND NOT COUNTS,
       else:
         highlighted_string += ini_str[i]
