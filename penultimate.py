@@ -50,16 +50,16 @@ class InvalidInputError(Exception):
 # End of the InvalidInputError class
 
 # Start of the InvalidLengthError class
-""" InvalidLengthError class throws an exception if the DNA input is less than 28 characters
+""" InvalidLengthError class throws an exception if the DNA input is less than 28 characters or greater than 10,000 characters
     Attributes:
     error_string --  The invalid DNA input
     message -- Explanation of the error
 """
 class InvalidLengthError(Exception):
   def __init__(self, error_string):
-    error_string = "DNA string entered is only " + str(len(ini_str)) + " characters long, it needs to be a minimum of 28 characters." 
-    self.message = error_string # Error message
-    super().__init__(self.message) # Errtoe message gets displayed
+    error_string = "DNA string entered is " + str(len(ini_str)) + " characters long, it needs to be a between 28 and 10,000 (inclusive) characters." 
+    self.message = error_string 
+    super().__init__(self.message) 
 # End of the InvalidLengthError class
 
 # Beginning of the Match class
@@ -79,12 +79,12 @@ again = True # Flag for our while loop
 while again==True:
   
   ini_str = input("Enter DNA string: ").upper()
-
+  if len(ini_str) < 28 or len(ini_str) > 10000:
+    raise InvalidLengthError(ini_str) # Exception gets thrown if the length of the sequence is not between 28 and 10,000 base pairs
   for i in range(len(ini_str)):
     if ini_str[i] not in accepted_characters:
       raise InvalidInputError(ini_str) # Exception gets thrown if any invalid character has been located in the sequence 
-  if len(ini_str) < 28:
-    raise InvalidLengthError(ini_str) # Exception gets thrown if the length of the sequence is not at least 28
+  
   
   match_list = []
 
